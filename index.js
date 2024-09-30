@@ -6,14 +6,19 @@ import { getCandidates } from './api/voting.js';
 const app = express()
 const PORT = process.env.PORT || 8888;
 
+const basePath = '/api/v1';
+
+app.get(`${basePath}/candidates`, async (req, res) => {
+  try {
+    const candidates = await getCandidates();
+    res.json(candidates);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching candidates' });
+  }
+});
+
 app.use('', router);
 
-app.listen(PORT, async () => { // Make the callback function async
-  try {
-    const candidates = await getCandidates(); // Await the promise
-    console.log(`Example app listening on port ${PORT}`);
-    console.log(candidates);
-  } catch (error) {
-    console.error('Error fetching candidates:', error);
-  }
+app.listen(PORT, async () => {
+  console.log(`Server is running on port ${PORT}`);
 });
