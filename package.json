@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for decentralized voting system",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SW7-Decentralized-voting/backend.git"
+  },
+  "author": "SW7-Decentralized-Voting",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/SW7-Decentralized-voting/backend/issues"
+  },
+  "homepage": "https://github.com/SW7-Decentralized-voting/backend#readme",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
