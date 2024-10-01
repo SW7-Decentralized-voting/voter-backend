@@ -9,8 +9,9 @@ const Party = sequelize.define('parties', {
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	party_name: {
+	partyName: {
 		type: DataTypes.STRING,
+		field: 'party_name',
 		allowNull: false,
 	},
 });

@@ -15,7 +15,10 @@ const Candidate = sequelize.define('candidates', {
 	partyId: {
 		type: DataTypes.INTEGER,
 		field: 'party_id',
-		allowNull: false,
+		references: {
+			model: 'parties',
+			key: 'id',
+		},
 	},
 });
 
