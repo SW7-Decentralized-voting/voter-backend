@@ -6,7 +6,7 @@ const handleQuery = (query, model) => {
 
 	for (const key in query) {
 		if (model.rawAttributes[key])
-			queryObj.where[key] = sanitize(query[key], 'alphanumeric');
+			queryObj.where[key] = sanitize(query[key]);
 		else
 			throw Error(`Invalid query parameter: ${key}`);
 	}
@@ -14,7 +14,7 @@ const handleQuery = (query, model) => {
 	return queryObj;
 };
 
-const sanitize = (string, type) => {
+const sanitize = (string) => {
 	return string.replace(/[^a-zA-Z0-9]/g, '');
 }
 
