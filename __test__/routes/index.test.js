@@ -44,6 +44,24 @@ describe('GET /api/v1/candidates', () => {
 		expect(response.body).toEqual(candidates);
 	});
 
+	it('should return 200 OK with query string', async () => {
+		const response = await request(app).get(`${baseRoute}/candidates?partyId=1`);
+		expect(response.statusCode).toBe(200);
+		expect(Candidate.findAll).toHaveBeenCalledWith({ where: { partyId: '1'}, ...standardCall });
+	});
+
+	it('should return 200 OK with multiple query string', async () => {
+		const response = await request(app).get(`${baseRoute}/candidates?partyId=1&full_name=John`);
+		expect(response.statusCode).toBe(200);
+		expect(Candidate.findAll).toHaveBeenCalledWith({ where: { partyId: '1', full_name: 'John'}, ...standardCall });
+	});
+
+	it('should return 400 Bad Request with invalid query string', async () => {
+		const response = await request(app).get(`${baseRoute}/candidates?invalid=1`);
+		expect(response.statusCode).toBe(400);
+		expect(Candidate.findAll).toHaveBeenCalledTimes(0);
+		expect(response.text).toBe('Invalid query parameter: invalid');
+	});
 
 	afterEach(() => {
 		Candidate.findAll.mockClear();
