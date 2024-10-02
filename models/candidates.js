@@ -8,9 +8,10 @@ const Candidate = sequelize.define('candidates', {
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	full_name: {
+	fullName: {
 		type: DataTypes.STRING,
 		allowNull: false,
+		field: 'full_name',
 	},
 	partyId: {
 		type: DataTypes.INTEGER,

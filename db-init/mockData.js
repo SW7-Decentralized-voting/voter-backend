@@ -1,128 +1,128 @@
 const parties = [
 	{
-		party_name: '2016 XXL Freshmen',
+		partyName: '2016 XXL Freshmen',
 	},
 	{
-		party_name: 'Opium',
+		partyName: 'Opium',
 	},
 	{
-		party_name: 'OVO',
+		partyName: 'OVO',
 	},
 	{
-		party_name: 'G.O.O.D. Music',
+		partyName: 'G.O.O.D. Music',
 	},
 	{
-		party_name: 'Dreamville',
+		partyName: 'Dreamville',
 	},
 	{
-		party_name: 'TDE',
+		partyName: 'TDE',
 	},
 	{
-		party_name: 'YSL',
+		partyName: 'YSL',
 	},
 	{
-		party_name: 'QC',
+		partyName: 'QC',
 	},
 	{
-		party_name: 'MMG',
+		partyName: 'MMG',
 	},
 	{
-		party_name: 'Roc Nation',
+		partyName: 'Roc Nation',
 	},
 	{
-		party_name: 'Shady Records',
+		partyName: 'Shady Records',
 	},
 	{
-		party_name: 'Death Row Records',
+		partyName: 'Death Row Records',
 	},
 	{
-		party_name: 'Bad seeds',
+		partyName: 'Bad seeds',
 	}
 ];
 
 const candidates = [
 	{
-		full_name: '21 Savage',
+		fullName: '21 Savage',
 		partyId: 1,
 	},
 	{
-		full_name: 'Destroy Lonely',
+		fullName: 'Destroy Lonely',
 		partyId: 2,
 	},
 	{
-		full_name: 'OVO Bartholomeow',
+		fullName: 'OVO Bartholomeow',
 		partyId: 3,
 	},
 	{
-		full_name: 'Kanye West',
+		fullName: 'Kanye West',
 		partyId: 4,
 	},
 	{
-		full_name: 'J. Cole',
+		fullName: 'J. Cole',
 		partyId: 5,
 	},
 	{
-		full_name: 'Kendrick Lamar',
+		fullName: 'Kendrick Lamar',
 		partyId: 6,
 	},
 	{
-		full_name: 'Young Thug',
+		fullName: 'Young Thug',
 		partyId: 7,
 	},
 	{
-		full_name: 'Lil Baby',
+		fullName: 'Lil Baby',
 		partyId: 8,
 	},
 	{
-		full_name: 'Rick Ross',
+		fullName: 'Rick Ross',
 		partyId: 9,
 	},
 	{
-		full_name: 'Jay-Z',
+		fullName: 'Jay-Z',
 		partyId: 10,
 	},
 	{
-		full_name: 'Eminem',
+		fullName: 'Eminem',
 		partyId: 11,
 	},
 	{
-		full_name: 'Snoop Dogg',
+		fullName: 'Snoop Dogg',
 		partyId: 12,
 	},
 	{
-		full_name: 'Lil Uzi Vert',
+		fullName: 'Lil Uzi Vert',
 		partyId: 13,
 	},
 	{
-		full_name: 'Lil Wayne',
+		fullName: 'Lil Wayne',
 		partyId: 13,
 	},
 	{
-		full_name: 'Drake',
+		fullName: 'Drake',
 		partyId: 3,
 	},
 	{
-		full_name: 'Nicki Minaj',
+		fullName: 'Nicki Minaj',
 		partyId: 3,
 	},
 	{
-		full_name: 'Lil Kim',
+		fullName: 'Lil Kim',
 		partyId: 3,
 	},
 	{
-		full_name: 'Cardi B',
+		fullName: 'Cardi B',
 		partyId: 3,
 	},
 	{
-		full_name: 'Megan Thee Stallion',
+		fullName: 'Megan Thee Stallion',
 		partyId: 3,
 	},
 	{
-		full_name: 'Doja Cat',
+		fullName: 'Doja Cat',
 		partyId: 3,
 	},
 	{
-		full_name: 'Saweetie',
+		fullName: 'Saweetie',
 		partyId: 3,
 	},
 ];

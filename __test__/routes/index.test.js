@@ -19,14 +19,14 @@ const server = app.listen(8888);
 //jest.mock('../../models/candidates.js');
 
 const standardCall = {
-	"attributes": ["id", "full_name", "partyId"],
-	"include": [
+	'attributes': ['id', 'full_name', 'partyId'],
+	'include': [
 		{
-			"association": "party",
-			"attributes": ["id", "partyName"],
+			'association': 'party',
+			'attributes': ['id', 'partyName'],
 		},
 	],
-}
+};
 
 describe('GET /api/v1', () => {
 	it('should return 200 OK', async () => {

@@ -1,11 +1,23 @@
 import express from 'express';
 const router = express.Router();
 import { getCandidates } from '../controllers/candidates.js';
+import { getParties } from '../controllers/parties.js';
 import handleQuery from '../utils/handleQuery.js';
 import Candidate from '../models/candidates.js';
+import Party from '../models/parties.js';
 
 router.get('/', (req, res) => {
 	res.send(router.stack);
+});
+
+router.get('/parties', (req, res) => {
+	getParties()
+		.then(parties => res.json(parties))
+		.catch(error => {
+			// eslint-disable-next-line no-console
+			console.error(error);
+			res.status(500).json({ error: 'Error fetching parties' });
+		});
 });
 
 router.get('/candidates', async (req, res) => {
