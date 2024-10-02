@@ -4,9 +4,8 @@ import request from 'supertest';
 import express from 'express';
 import router from '../../routes/index.js'; // Adjust the import path to where your route is located
 import Candidate from '../../models/candidates.js';
-import Party from '../../models/parties.js';
 import { jest } from '@jest/globals';
-import { candidates, parties } from '../db/mockData.js';
+import { candidates } from '../db/mockData.js';
 
 const baseRoute = '/api/v1';
 
