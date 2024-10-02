@@ -56,4 +56,9 @@ const getCandidates = async () => {
     return await Candidate.findAll();
 };
 
-export { getCandidates };
+// Fetch all parties
+const getParties = async () => {
+    return await Party.findAll();
+};
+
+export { getCandidates, getParties };
