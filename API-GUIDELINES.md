@@ -287,47 +287,12 @@ There are 2 kinds of errors:
 - An error where you expect another developer's code to gracefully recover at runtime
 - An error indicating a bug in the developer's code that is unlikely to be recoverable at runtime; the developer must just fix their code
 
-**Please read [ERRORS.md](./ERRORS.md)!**
-
-<a href="#rest-error-code-header" name="rest-error-code-header">:white_check_mark:</a> **DO** return an `x-ms-error-code` response header with a string error code indicating what went wrong.
-
-*NOTE: `x-ms-error-code` values are part of your API contract (because customer code is likely to do comparisons against them) and cannot change in the future.*
-
-<a href="#rest-error-code-enum" name="rest-error-code-enum">:heavy_check_mark:</a> **YOU MAY** implement the `x-ms-error-code` values as an enum with `"modelAsString": true` because it's possible add new values over time.  In particular, it's only a breaking change if the same conditions result in a *different* top-level error code.
-
-<a href="#rest-add-codes-in-new-api-version" name="rest-add-codes-in-new-api-version">:warning:</a> **YOU SHOULD NOT** add new top-level error codes to an existing API without bumping the service version.
-
-<a href="#rest-descriptive-error-code-values" name="rest-descriptive-error-code-values">:white_check_mark:</a> **DO** carefully craft unique `x-ms-error-code` string values for errors that are recoverable at runtime.  Reuse common error codes for usage errors that are not recoverable.
-
-<a href="#rest-error-code-grouping" name="rest-error-code-grouping">:heavy_check_mark:</a> **YOU MAY** group common customer code errors into a few `x-ms-error-code` string values.
-
-<a href="#rest-error-code-header-and-body-match" name="rest-error-code-header-and-body-match">:white_check_mark:</a> **DO** ensure that the top-level error's `code` value is identical to the `x-ms-error-code` header's value.
-
-<a href="#rest-error-response-body-structure" name="rest-error-response-body-structure">:white_check_mark:</a> **DO** provide a response body with the following structure:
-
-**ErrorResponse** : Object
-
-Property | Type | Required | Description
--------- | ---- | :------: | -----------
-`error` | ErrorDetail | ✔ | The top-level error object whose `code` matches the `x-ms-error-code` response header
-
-**ErrorDetail** : Object
+Use this framework when sending error responses:
 
 Property | Type | Required | Description
 -------- | ---- | :------: | -----------
 `code` | String | ✔ | One of the error codes defined in [ERRORS.md](./ERRORS.md).
 `message` | String | ✔ | A human-readable representation of the error, also found in [ERRORS.md](./ERRORS.md).
-`target` | String |  | The target of the error.
-`details` | ErrorDetail[] |  | An array of details about specific errors that led to this reported error.
-`innererror` | InnerError |  | An object containing more specific information than the current object about the error.
-_additional properties_ |   | | Additional properties that can be useful when debugging.
-
-**InnerError** : Object
-
-Property | Type | Required | Description
--------- | ---- | :------: | -----------
-`code` | String |  | A more specific error code than was provided by the containing error.
-`innererror` | InnerError |  | An object containing more specific information than the current object about the error.
 
 Example:
 ```json
@@ -335,11 +300,6 @@ Example:
   "error": {
     "code": "E0101",
     "message": "Invalid email",
-    "target": "target of error",
-    "innererror": {
-      "code": "E0199",
-      "minLength": 8,
-    }
   }
 }
 ```
