@@ -1,130 +1,102 @@
 const parties = [
 	{
-		partyName: '2016 XXL Freshmen',
+	  partyName: 'G. Nordlisten',
 	},
 	{
-		partyName: 'Opium',
+	  partyName: 'H. Sydlisten',
 	},
 	{
-		partyName: 'OVO',
+	  partyName: 'R. Østpartiet',
 	},
 	{
-		partyName: 'G.O.O.D. Music',
+	  partyName: 'T. Vestpartiet',
 	},
 	{
-		partyName: 'Dreamville',
-	},
-	{
-		partyName: 'TDE',
-	},
-	{
-		partyName: 'YSL',
-	},
-	{
-		partyName: 'QC',
-	},
-	{
-		partyName: 'MMG',
-	},
-	{
-		partyName: 'Roc Nation',
-	},
-	{
-		partyName: 'Shady Records',
-	},
-	{
-		partyName: 'Death Row Records',
-	},
-	{
-		partyName: 'Bad seeds',
+	  partyName: 'Uden for partierne',
 	}
-];
-
-const candidates = [
+  ];
+  
+  const candidates = [
 	{
-		fullName: '21 Savage',
-		partyId: 1,
+	  fullName: 'Bettina Bendtsen',
+	  partyId: 1,
 	},
 	{
-		fullName: 'Destroy Lonely',
-		partyId: 2,
+	  fullName: 'Fanny Findsen',
+	  partyId: 1,
 	},
 	{
-		fullName: 'OVO Bartholomeow',
-		partyId: 3,
+	  fullName: 'Henrik Hansen',
+	  partyId: 1,
 	},
 	{
-		fullName: 'Kanye West',
-		partyId: 4,
+	  fullName: 'Mette Madsen',
+	  partyId: 1,
 	},
 	{
-		fullName: 'J. Cole',
-		partyId: 5,
+	  fullName: 'Ole Olsen',
+	  partyId: 2,
 	},
 	{
-		fullName: 'Kendrick Lamar',
-		partyId: 6,
+	  fullName: 'Sidsel Svendsen',
+	  partyId: 2,
 	},
 	{
-		fullName: 'Young Thug',
-		partyId: 7,
+	  fullName: 'Jens Jørgensen',
+	  partyId: 2,
 	},
 	{
-		fullName: 'Lil Baby',
-		partyId: 8,
+	  fullName: 'Frederik Frandsen',
+	  partyId: 2,
 	},
 	{
-		fullName: 'Rick Ross',
-		partyId: 9,
+	  fullName: 'Anette Andersen',
+	  partyId: 3,
 	},
 	{
-		fullName: 'Jay-Z',
-		partyId: 10,
+	  fullName: 'Tina Troelsen',
+	  partyId: 3,
 	},
 	{
-		fullName: 'Eminem',
-		partyId: 11,
+	  fullName: 'Jette Jørgensen',
+	  partyId: 3,
 	},
 	{
-		fullName: 'Snoop Dogg',
-		partyId: 12,
+	  fullName: 'Peter Pedersen',
+	  partyId: 3,
 	},
 	{
-		fullName: 'Lil Uzi Vert',
-		partyId: 13,
+	  fullName: 'Jenny Jensen',
+	  partyId: 4,
 	},
 	{
-		fullName: 'Lil Wayne',
-		partyId: 13,
+	  fullName: 'Carsten Carlsen',
+	  partyId: 4,
 	},
 	{
-		fullName: 'Drake',
-		partyId: 3,
+	  fullName: 'Mogens Mortensen',
+	  partyId: 4,
 	},
 	{
-		fullName: 'Nicki Minaj',
-		partyId: 3,
+	  fullName: 'Sanne Sørensen',
+	  partyId: 4,
 	},
 	{
-		fullName: 'Lil Kim',
-		partyId: 3,
+	  fullName: 'Camilla Christensen',
+	  partyId: 5,
 	},
 	{
-		fullName: 'Cardi B',
-		partyId: 3,
+	  fullName: 'Søren Simonsen',
+	  partyId: 5,
 	},
 	{
-		fullName: 'Megan Thee Stallion',
-		partyId: 3,
+	  fullName: 'Andreas Andersen',
+	  partyId: 5,
 	},
 	{
-		fullName: 'Doja Cat',
-		partyId: 3,
-	},
-	{
-		fullName: 'Saweetie',
-		partyId: 3,
-	},
-];
-
-export { parties, candidates };
+	  fullName: 'Palle Petersen',
+	  partyId: 5,
+	}
+  ];
+  
+  export { parties, candidates };
