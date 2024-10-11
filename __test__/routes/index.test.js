@@ -50,9 +50,9 @@ describe('GET /api/v1/candidates', () => {
 	});
 
 	it('should return 200 OK with multiple query string', async () => {
-		const response = await request(app).get(`${baseRoute}/candidates?partyId=1&full_name=John`);
+		const response = await request(app).get(`${baseRoute}/candidates?partyId=1&fullName=John`);
 		expect(response.statusCode).toBe(200);
-		expect(Candidate.findAll).toHaveBeenCalledWith({ where: { partyId: '1', full_name: 'John'}, ...standardCall });
+		expect(Candidate.findAll).toHaveBeenCalledWith({ where: { partyId: '1', fullName: 'John'}, ...standardCall });
 	});
 
 	it('should return 400 Bad Request with invalid query string', async () => {
