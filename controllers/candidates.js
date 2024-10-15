@@ -4,7 +4,7 @@ import Candidate from '../schemas/Candidate.js';
 import { sanitizeFilter } from 'mongoose';
 
 export const getCandidates = async (filter) => {
-	if (!filter.populate) {
+	if (!filter?.populate) {
 		return await Candidate.find(sanitizeFilter(filter));
 	}
 
