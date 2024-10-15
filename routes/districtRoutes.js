@@ -1,11 +1,11 @@
-import express from "express";
-import { getNominationDistricts } from "../controllers/districts.js";
-import NominationDistrict from "../schemas/NominationDistrict.js";
-import handleQuery from "../utils/handleQuery.js";
+import express from 'express';
+import { getNominationDistricts } from '../controllers/districts.js';
+import NominationDistrict from '../schemas/NominationDistrict.js';
+import handleQuery from '../utils/handleQuery.js';
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
 	let query;
 
 	try {

@@ -72,7 +72,7 @@ describe('handleQuery', () => {
 			arrayStr: ['test1', 'test2'],
 			bool: true,
 			null: null
-		})
+		});
 	});
 
 	it('should just keep undefined values (mongoose will ignore them)', () => {

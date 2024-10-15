@@ -1,11 +1,11 @@
-import express from "express";
-import { getConstituencies } from "../controllers/constituencies.js";
-import Constituency from "../schemas/Constituency.js";
-import handleQuery from "../utils/handleQuery.js";
+import express from 'express';
+import { getConstituencies } from '../controllers/constituencies.js';
+import Constituency from '../schemas/Constituency.js';
+import handleQuery from '../utils/handleQuery.js';
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
 	let query;
 
 	try {

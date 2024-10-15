@@ -3,10 +3,10 @@ import { sanitizeFilter } from 'mongoose';
 
 export const getParties = async (filter) => {
 	if (!filter.populate) {
-		return await Party.find(sanitizeFilter(filter))
+		return await Party.find(sanitizeFilter(filter));
 	}
 	
 	filter.populate = null;
 	return await Party.find(sanitizeFilter(filter))
-		.populate({ path: 'party', select: '-_id name list' })
-}
+		.populate({ path: 'party', select: '-_id name list' });
+};

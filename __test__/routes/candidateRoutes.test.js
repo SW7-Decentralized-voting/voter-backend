@@ -18,9 +18,8 @@ app.use(baseRoute, router);
 
 const server = app.listen(8888);
 
-let db;
 beforeAll(async () => {
-	db = await connectDb();
+	await connectDb();
 	await Party.insertMany(mockdata.parties);
 	await Constituency.insertMany(mockdata.constituencies);
 	await NominationDistrict.insertMany(await districtsWithIds(mockdata.nominationDistricts));
@@ -122,6 +121,12 @@ describe('GET /api/v1/candidates', () => {
 		expect(response.statusCode).toBe(200);
 		expect(response.body).toEqual([]);
 		await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
+	});
+
+	it('should return 400 Bad Request if a query id is invalid', async () => {
+		const response = await request(app).get(baseRoute + '?party=invalid');
+		expect(response.statusCode).toBe(400);
+		expect(response.body.error).toBe('Cast to ObjectId failed for value "invalid" (type string) at path "party" for model "Candidate"');
 	});
 });
 

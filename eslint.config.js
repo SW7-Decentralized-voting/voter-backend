@@ -26,6 +26,7 @@ export default [
     plugins: { jest },
     rules: {
       ...jest.configs.recommended.rules,
+      "jest/expect-expect": "off",
     },
     languageOptions: {
       globals: {

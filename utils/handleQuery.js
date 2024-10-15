@@ -4,17 +4,17 @@ const handleQuery = (query, model) => {
 	let queryObj = {};
 
 	for (const key in query) {
-			if (model.schema.paths[key]) {
-					if (typeof query[key] === 'string') {
-							queryObj[key] = sanitize(query[key].split(','));
-					} else {
-							queryObj[key] = sanitize(query[key]);
-					}
-			} else if (key === 'populate' && query[key]) {
-					queryObj.populate = query[key];
+		if (model.schema.paths[key]) {
+			if (typeof query[key] === 'string') {
+				queryObj[key] = sanitize(query[key].split(','));
 			} else {
-					throw Error(`Invalid query parameter: ${key}`);
+				queryObj[key] = sanitize(query[key]);
 			}
+		} else if (key === 'populate' && query[key]) {
+			queryObj.populate = query[key];
+		} else {
+			throw Error(`Invalid query parameter: ${key}`);
+		}
 	}
 
 	return queryObj;
@@ -23,8 +23,6 @@ const handleQuery = (query, model) => {
 const sanitize = (input) => {
 	if (Array.isArray(input) && typeof input[0] === 'string')
 		return input.map(str => str.replace(/[^a-zA-Z0-9]/g, ''));
-	if (typeof input === 'string')
-		return input.replace(/[^a-zA-Z0-9]/g, '');
 
 	return input;
 };

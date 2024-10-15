@@ -5,7 +5,7 @@ import { sanitizeFilter } from 'mongoose';
 
 export const getCandidates = async (filter) => {
 	if (!filter.populate) {
-		return await Candidate.find(sanitizeFilter(filter))
+		return await Candidate.find(sanitizeFilter(filter));
 	}
 
 	filter.populate = null;
@@ -15,7 +15,7 @@ export const getCandidates = async (filter) => {
 			path: 'nominationDistrict',
 			select: '-_id name constituency',
 			populate: { path: 'constituency', select: '-_id name' }
-		})
+		});
 
 
 };
