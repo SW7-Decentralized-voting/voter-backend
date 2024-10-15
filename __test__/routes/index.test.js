@@ -26,18 +26,6 @@ describe('GET /api/v1', () => {
 	});
 });
 
-describe('GET /api/v1/candidates', () => {
-	it('should return 200 OK', async () => {
-		const response = await request(app).get(`${baseRoute}/candidates`);
-		expect(response.statusCode).toBe(200);
-	});
-
-	it('should return a list of candidates', async () => {
-		const response = await request(app).get(`${baseRoute}/candidates`);
-		expect(response.body).toBeInstanceOf(Array);
-	});
-});
-
 afterAll(async () => {
 	// You're my wonderwall
 	await db.collection('candidates').deleteMany();

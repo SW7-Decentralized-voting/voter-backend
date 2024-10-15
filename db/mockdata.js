@@ -216,6 +216,10 @@ export default {
 			name: 'District 2',
 			constituency: 'Constituency 2',
 		},
+		{
+			name: 'District 3',
+			constituency: 'Constituency 1',
+		}
 	],
 
 };
