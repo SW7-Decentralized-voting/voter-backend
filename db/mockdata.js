@@ -23,6 +23,21 @@ export default {
 		},
 		{
 			name: 'Ole Olsen',
+			partyId: 'Nordlisten',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Sidsel Svendsen',
+			partyId: 'Nordlisten',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Jens Jørgensen',
+			partyId: 'Nordlisten',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Ole Olsen',
 			partyId: 'Sydlisten',
 			nominationDistrictId: 'District 2',
 		},
@@ -95,6 +110,71 @@ export default {
 			name: 'Mia Miasen',
 			partyId: 'Uden for partierne',
 			nominationDistrictId: 'District 1',
+		},
+		{
+			name: 'Lars Larsen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Morten Mortensen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Kurt Kurtensen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Hans Hansen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Ulla Ullasen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 1',
+		},
+		{
+			name: 'Ib Ibsen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 1',
+		},
+		{
+			name: 'Pia Piasen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 1',
+		},
+		{
+			name: 'Jesper Jespersen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 1',
+		},
+		{
+			name: 'Mia Miasen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 1',
+		},
+		{
+			name: 'Lars Larsen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Morten Mortensen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Kurt Kurtensen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
+		},
+		{
+			name: 'Hans Hansen',
+			partyId: 'Uden for partierne',
+			nominationDistrictId: 'District 2',
 		}
 	],
 	parties: [
@@ -138,4 +218,4 @@ export default {
 		},
 	],
 
-}
+};

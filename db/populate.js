@@ -1,24 +1,26 @@
-import { connectToDb } from "./index.js";
+import { connectToDb } from './index.js';
 // import env MONGO_URI from .env
 import keys from '../config/keys.js';
 
-import mockdata from "./mockdata.js";
+import mockdata from './mockdata.js';
 
-import Candidate from "../schemas/candidate.js";
-import Party from "../schemas/party.js";
-import NominationDistrict from "../schemas/nominationDistrict.js";
-import Constituency from "../schemas/constituency.js";
+import Candidate from '../schemas/Candidate.js';
+import Party from '../schemas/Party.js';
+import NominationDistrict from '../schemas/nominationDistrict.js';
+import Constituency from '../schemas/constituency.js';
 
 
 const db = connectToDb(keys.mongoURI);
 
 // Test connection
 db.once('open', () => {
+	// eslint-disable-next-line no-console
 	console.log('Connected to MongoDB');
 });
 
 // Clear the database if argument 'clear' is passed
 if (process.argv[2] === 'clear') {
+	// eslint-disable-next-line no-console
 	console.log('Clearing database...');
 	await Candidate.deleteMany();
 	await Party.deleteMany();
@@ -35,7 +37,7 @@ await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
 const party1 = await Party.findOne({ name: 'Nordlisten' });
 
 const candidatesInParty1 = await Candidate.find({ partyId: party1._id });
-
+// eslint-disable-next-line no-console
 console.log('Candidates in', party1.name, ':\n ', candidatesInParty1.map(candidate => candidate.name).join('\n  '));
 
 db.close();

@@ -1,9 +1,7 @@
 // Controllers for candidates
 
-import Candidate from '../models/candidates.js';
-import Party from '../models/parties.js';
+import Candidate from '../schemas/Candidate.js';
 
 export const getCandidates = async (filter) => {
-	Candidate.hasOne(Party, { sourceKey: 'partyId', foreignKey: 'id' });
-	return await Candidate.findAll(filter);
+	return await Candidate.find(filter);
 };

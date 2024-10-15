@@ -11,6 +11,7 @@ function connectToDb(uri, options = {}) {
 	mongoose.connect(uri, options);
 
 	const db = mongoose.connection;
+	// eslint-disable-next-line no-console
 	db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
 	return db;
