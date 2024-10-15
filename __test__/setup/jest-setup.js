@@ -34,3 +34,14 @@ export default async () => {
   // Set reference to mongod in order to close the server during teardown.
   global.__MONGOD__ = mongod;
 };
+
+const originalEmitWarning = process.emitWarning;
+
+process.emitWarning = (warning, ...args) => {
+  if (typeof warning === 'string' && warning.includes('VM Modules is an experimental feature')) {
+    // Suppress the specific warning
+    return;
+  }
+  // Call the original emitWarning function for other warnings
+  originalEmitWarning.call(process, warning, ...args);
+};

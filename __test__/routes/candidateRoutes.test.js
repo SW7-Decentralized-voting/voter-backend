@@ -9,6 +9,7 @@ import Candidate from '../../schemas/Candidate.js';
 import NominationDistrict from '../../schemas/NominationDistrict.js';
 import Party from '../../schemas/Party.js';
 import Constituency from '../../schemas/Constituency.js';
+import { jest } from '@jest/globals'
 
 const baseRoute = '/api/v1/candidates';
 
@@ -127,6 +128,16 @@ describe('GET /api/v1/candidates', () => {
 		const response = await request(app).get(baseRoute + '?party=invalid');
 		expect(response.statusCode).toBe(400);
 		expect(response.body.error).toBe('Cast to ObjectId failed for value "invalid" (type string) at path "party" for model "Candidate"');
+	});
+
+	it('should return 500 Internal Server Error if an error occurs', async () => {
+		jest.spyOn(Candidate, 'find').mockImplementationOnce(() => {
+			throw new Error('Error fetching candidates');
+		});
+		jest.spyOn(console, 'error').mockImplementationOnce(() => {});
+		const response = await request(app).get(baseRoute);
+		expect(response.statusCode).toBe(500);
+		expect(response.body.error).toBe('Error fetching candidates');
 	});
 });
 
