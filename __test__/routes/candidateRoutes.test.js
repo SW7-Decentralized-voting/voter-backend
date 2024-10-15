@@ -127,10 +127,10 @@ describe('GET /api/v1/candidates', () => {
 
 afterAll(async () => {
 	// You're my wonderwall
-	await db.collection('candidates').deleteMany();
-	await db.collection('nominationDistricts').deleteMany();
-	await db.collection('constituencies').deleteMany();
-	await db.collection('parties').deleteMany();
+	await Candidate.deleteMany();
+	await NominationDistrict.deleteMany();
+	await Constituency.deleteMany();
+	await Party.deleteMany();
 	await mongoose.connection.close();
 	server.close();
 });
