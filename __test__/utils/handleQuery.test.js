@@ -3,70 +3,93 @@
 import handleQuery from '../../utils/handleQuery.js';
 
 describe('handleQuery', () => {
-	it('should return an object with where key', () => {
-		const query = {
-			partyId: '1',
-		};
-		const model = {
-			rawAttributes: {
-				partyId: {
-					type: 'INTEGER',
-				},
-			},
-		};
+	it('should return an object with a filter key', () => {
+		const query = { name: 'test' };
+		const model = { schema: { paths: { name: {} } } };
 		const result = handleQuery(query, model);
-		expect(result).toEqual({ where: { partyId: '1' } });
+
+		expect(result).toHaveProperty('name');
 	});
 
-	it('should return an object with where key for multiple query string', () => {
-		const query = {
-			partyId: '1',
-			full_name: 'John',
-		};
-		const model = {
-			rawAttributes: {
-				partyId: {
-					type: 'INTEGER',
-				},
-				full_name: {
-					type: 'STRING',
-				},
-			},
-		};
-		const result = handleQuery(query, model);
-		expect(result).toEqual({ where: { partyId: '1', full_name: 'John' } });
+	it('should throw an error if the query parameter is invalid', () => {
+		const query = { invalid: 'test' };
+		const model = { schema: { paths: { name: {} } } };
+
+		expect(() => handleQuery(query, model)).toThrow(
+			'Invalid query parameter: invalid'
+		);
 	});
 
-	it('should throw an error for invalid query string', () => {
-		const query = {
-			invalid: '1',
-		};
-		const model = {
-			rawAttributes: {
-				partyId: {
-					type: 'INTEGER',
-				},
-			},
-		};
-		expect(() => handleQuery(query, model)).toThrow('Invalid query parameter: invalid');
+	it('should return an object with a populate key if defined in query', () => {
+		const query = { populate: true };
+		const model = { schema: { paths: { name: {} } } };
+		const result = handleQuery(query, model);
+
+		expect(result).toHaveProperty('populate');
 	});
 
-	it('should sanitize query string', () => {
-		const query = {
-			partyId: '1+"*@',
-			full_name: 'Jo#hn"',
-		};
-		const model = {
-			rawAttributes: {
-				partyId: {
-					type: 'INTEGER',
-				},
-				full_name: {
-					type: 'STRING',
-				},
-			},
-		};
+	it('should split comma separated values for strings', () => {
+		const query = { name: 'test1,test2' };
+		const model = { schema: { paths: { name: {} } } };
 		const result = handleQuery(query, model);
-		expect(result).toEqual({ where: { partyId: '1', full_name: 'John' } });
+
+		expect(result.name).toEqual(['test1', 'test2']);
 	});
+
+	it('should split comma separated values for strings (one value/no comma)', () => {
+		const query = { name: 'test' };
+		const model = { schema: { paths: { name: {} } } };
+		const result = handleQuery(query, model);
+
+		expect(result.name).toEqual(['test']);
+	});
+
+	it('should sanitize string values', () => {
+		const query = { name: 'test^(!=?' };
+		const model = { schema: { paths: { name: {} } } };
+		const result = handleQuery(query, model);
+
+		expect(result.name).toEqual(['test']);
+	});
+
+	it('should sanitize string values (multiple values)', () => {
+		const query = { name: 'test1^(!=?,test2^(!=?' };
+		const model = { schema: { paths: { name: {} } } };
+		const result = handleQuery(query, model);
+
+		expect(result.name).toEqual(['test1', 'test2']);
+	});
+
+	it('should take both numbers, strings, booleans, null values, and arrays', () => {
+		const query = { name: 'test1,test2', number: 123, arrayNum: [1, 2, 3], arrayStr: ['test1', 'test2'], bool: true, null: null };
+		const model = { schema: { paths: { name: {}, number: {}, arrayNum: {}, arrayStr: {}, bool: {}, null: {} } } };
+		const result = handleQuery(query, model);
+
+		expect(result).toEqual({
+			name: ['test1', 'test2'],
+			number: 123,
+			arrayNum: [1, 2, 3],
+			arrayStr: ['test1', 'test2'],
+			bool: true,
+			null: null
+		})
+	});
+
+	it('should just keep undefined values (mongoose will ignore them)', () => {
+		const query = { name: undefined };
+		const model = { schema: { paths: { name: {} } } };
+		const result = handleQuery(query, model);
+
+		expect(result).toEqual({ name: undefined });
+	});
+
+	it('should handle empty strings', () => {
+		const query = { name: '' };
+		const model = { schema: { paths: { name: {} } } };
+		const result = handleQuery(query, model);
+
+		expect(result).toEqual({ name: [''] });
+	});
+
+
 });
