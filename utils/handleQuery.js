@@ -22,7 +22,7 @@ const handleQuery = (query, model) => {
 
 const sanitize = (input) => {
 	if (Array.isArray(input) && typeof input[0] === 'string')
-		return input.map(str => str.replace(/[^a-zA-Z0-9]/g, ''));
+		return input.map(str => str.replace(/[^a-zA-Z0-9 ]/g, ''));
 
 	return input;
 };
