@@ -16,7 +16,7 @@ export default [
       "no-constant-condition": "error",
       "no-empty": "error",
     },
-    ignores: ["node_modules/", "eslint.config.js"],
+    ignores: ["node_modules/", "eslint.config.js", "**/schemas/*"],
     languageOptions: {
       globals: globals.node,
     },
