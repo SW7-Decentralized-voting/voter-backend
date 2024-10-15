@@ -81,7 +81,7 @@ describe('GET /api/v1/districts', () => {
 		jest.spyOn(NominationDistrict, 'find').mockImplementationOnce(() => {
 			throw new Error('Uncaught error');
 		});
-
+		jest.spyOn(console, 'error').mockImplementationOnce(() => {});
 		const response = await request(app).get(baseRoute);
 		expect(response.statusCode).toBe(500);
 		expect(response.body).toEqual({ error: 'Error fetching districts' });
