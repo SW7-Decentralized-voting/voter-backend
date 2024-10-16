@@ -4,6 +4,7 @@ import process from 'process';
 import cors from './config/cors.js';
 import dotenv from 'dotenv';
 import { connectToDb } from './db/index.js';
+import { subscribeToKeyGeneration } from './utils/subscribe.js';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cors);
 app.use('/api/v1', router);
 
 app.listen(PORT, async () => {
+  await subscribeToKeyGeneration();
   // eslint-disable-next-line no-console
   console.log(`Server is running on port ${PORT}`);
 });
