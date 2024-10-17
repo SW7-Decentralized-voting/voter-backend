@@ -221,5 +221,97 @@ export default {
 			constituency: 'Constituency 1',
 		}
 	],
+	pollingStations: [
+		{
+			name: 'Polling Station 1',
+			nominationDistrict: 'District 1',
+			expectedVoters: 1000,
+		},
+		{
+			name: 'Polling Station 2',
+			nominationDistrict: 'District 2',
+			expectedVoters: 2000,
+		},
+		{
+			name: 'Polling Station 3',
+			nominationDistrict: 'District 3',
+			expectedVoters: 1500,
+		},
+		{
+			name: 'Polling Station 4',
+			nominationDistrict: 'District 1',
+			expectedVoters: 1000,
+		},
+		{
+			name: 'Polling Station 5',
+			nominationDistrict: 'District 2',
+			expectedVoters: 2000,
+		},
+		{
+			name: 'Polling Station 6',
+			nominationDistrict: 'District 3',
+			expectedVoters: 1500,
+		},
+		{
+			name: 'Polling Station 7',
+			nominationDistrict: 'District 1',
+			expectedVoters: 1000,
+		},
+		{
+			name: 'Polling Station 8',
+			nominationDistrict: 'District 2',
+			expectedVoters: 2000,
+		},
+		{
+			name: 'Polling Station 9',
+			nominationDistrict: 'District 3',
+			expectedVoters: 1500,
+		},
+		{
+			name: 'Polling Station 10',
+			nominationDistrict: 'District 1',
+			expectedVoters: 1000,
+		},
+		{
+			name: 'Polling Station 11',
+			nominationDistrict: 'District 2',
+			expectedVoters: 2000,
+		},
+		{
+			name: 'Polling Station 12',
+			nominationDistrict: 'District 3',
+			expectedVoters: 1500,
+		},
+		{
+			name: 'Polling Station 13',
+			nominationDistrict: 'District 1',
+			expectedVoters: 1000,
+		},
+		{
+			name: 'Polling Station 14',
+			nominationDistrict: 'District 2',
+			expectedVoters: 2000,
+		},
+		{
+			name: 'Polling Station 15',
+			nominationDistrict: 'District 3',
+			expectedVoters: 1500,
+		},
+		{
+			name: 'Polling Station 16',
+			nominationDistrict: 'District 1',
+			expectedVoters: 1000,
+		},
+		{
+			name: 'Polling Station 17',
+			nominationDistrict: 'District 2',
+			expectedVoters: 2000,
+		},
+		{
+			name: 'Polling Station 18',
+			nominationDistrict: 'District 3',
+			expectedVoters: 1500,
+		},
+	]
 
 };

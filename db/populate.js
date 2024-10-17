@@ -8,8 +8,9 @@ import Candidate from '../schemas/Candidate.js';
 import Party from '../schemas/Party.js';
 import NominationDistrict from '../schemas/NominationDistrict.js';
 import Constituency from '../schemas/Constituency.js';
+import PollingStation from '../schemas/PollingStation.js';
 
-import { districtsWithIds, candidateWithIds } from './addIds.js';
+import { districtsWithIds, candidateWithIds, pollingStationWithIds } from './addIds.js';
 
 
 const db = connectToDb(keys.mongoURI);
@@ -28,12 +29,14 @@ if (process.argv[2] === 'clear') {
 	await Party.deleteMany();
 	await NominationDistrict.deleteMany();
 	await Constituency.deleteMany();
+	await PollingStation.deleteMany();
 }
 
 await Party.insertMany(mockdata.parties);
 await Constituency.insertMany(mockdata.constituencies);
 await NominationDistrict.insertMany(await districtsWithIds(mockdata.nominationDistricts));
 await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
+await PollingStation.insertMany(await pollingStationWithIds(mockdata.pollingStations));
 
 const party1 = await Party.findOne({ name: 'Nordlisten' });
 

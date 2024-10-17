@@ -37,7 +37,18 @@ export async function candidateWithIds(candidates) {
 				party: party._id,
 				nominationDistrict: nominationDistrict._id,
 			};
-	}));
+		}));
+}
+
+export async function pollingStationWithIds(pollingStations) {
+	return await Promise.all(
+		pollingStations.map(async pollingStation => {
+			const district = await NominationDistrict.findOne({ name: pollingStation.nominationDistrict });
+			return {
+				...pollingStation,
+				nominationDistrict: district._id,
+			};
+		}));
 }
 
 /**
