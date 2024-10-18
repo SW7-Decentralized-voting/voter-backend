@@ -1,4 +1,3 @@
-
 export default {
 	candidates: [
 		{
@@ -84,51 +83,6 @@ export default {
 		{
 			name: 'Hans Hansen',
 			party: 'Vestpartiet',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Ulla Ullasen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 1',
-		},
-		{
-			name: 'Ib Ibsen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 1',
-		},
-		{
-			name: 'Pia Piasen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 1',
-		},
-		{
-			name: 'Jesper Jespersen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 1',
-		},
-		{
-			name: 'Mia Miasen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 1',
-		},
-		{
-			name: 'Lars Larsen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Morten Mortensen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Kurt Kurtensen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Hans Hansen',
-			party: 'Uden for partierne',
 			nominationDistrict: 'District 2',
 		},
 		{
@@ -313,5 +267,4 @@ export default {
 			expectedVoters: 1500,
 		},
 	]
-
 };
