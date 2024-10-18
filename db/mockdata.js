@@ -22,21 +22,6 @@ export default {
 		},
 		{
 			name: 'Ole Olsen',
-			party: 'Nordlisten',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Sidsel Svendsen',
-			party: 'Nordlisten',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Jens Jørgensen',
-			party: 'Nordlisten',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Ole Olsen',
 			party: 'Sydlisten',
 			nominationDistrict: 'District 2',
 		},
@@ -71,16 +56,6 @@ export default {
 			nominationDistrict: 'District 2',
 		},
 		{
-			name: 'Morten Mortensen',
-			party: 'Vestpartiet',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Kurt Kurtensen',
-			party: 'Vestpartiet',
-			nominationDistrict: 'District 2',
-		},
-		{
 			name: 'Hans Hansen',
 			party: 'Vestpartiet',
 			nominationDistrict: 'District 2',
@@ -111,22 +86,12 @@ export default {
 			nominationDistrict: 'District 1',
 		},
 		{
-			name: 'Lars Larsen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 2',
-		},
-		{
 			name: 'Morten Mortensen',
 			party: 'Uden for partierne',
 			nominationDistrict: 'District 2',
 		},
 		{
 			name: 'Kurt Kurtensen',
-			party: 'Uden for partierne',
-			nominationDistrict: 'District 2',
-		},
-		{
-			name: 'Hans Hansen',
 			party: 'Uden for partierne',
 			nominationDistrict: 'District 2',
 		}
