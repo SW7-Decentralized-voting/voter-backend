@@ -1,12 +1,12 @@
 // Sanitize query string and return an object for Sequelize query
 
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 /**
  * Sanitize query string and return an object for mongoose query
- * @param {Object} query user query object to sanitize and check for valid query parameters
+ * @param {object} query user query object to sanitize and check for valid query parameters
  * @param {Schema} model mongoose schema to check for valid query
- * @returns {Object} sanitized query object with valid query parameters
+ * @returns {object} sanitized query object with valid query parameters
  */
 const handleQuery = (query, model) => {
 	let queryObj = {};

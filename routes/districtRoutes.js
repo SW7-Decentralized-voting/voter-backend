@@ -8,9 +8,9 @@ const router = express.Router();
 /**
  * GET /nominationDistricts route to fetch nomination districts from the database
  * Accepts query parameters to filter the results
- * @param {Express.Request} req Query parameters to filter the results in req.query
- * @param {Express.Response} res Response object to send the nomination districts
- * @returns {Express.Response} The nomination districts that match the query parameters
+ * @param {Request} req Query parameters to filter the results in req.query
+ * @param {Response} res Response object to send the nomination districts
+ * @returns {Response} The nomination districts that match the query parameters
  */
 router.get('/', (req, res) => {
 	let query;
@@ -31,3 +31,7 @@ router.get('/', (req, res) => {
 });
 
 export default router;
+
+/**
+ * @import { Response, Request } from 'express';
+ */
