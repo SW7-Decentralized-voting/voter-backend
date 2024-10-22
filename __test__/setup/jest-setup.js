@@ -1,6 +1,6 @@
 /**
-*   Sets up a connection to an in-memory mongo database for fast and isolated testing
-*/
+ *   Sets up a connection to an in-memory mongo database for fast and isolated testing
+ */
 
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { join } from 'path';
@@ -37,9 +37,9 @@ export default async () => {
 
 const originalEmitWarning = process.emitWarning;
 
+// Suppress specific warnings
 process.emitWarning = (warning, ...args) => {
   if (typeof warning === 'string' && warning.includes('VM Modules is an experimental feature')) {
-    // Suppress the specific warning
     return;
   }
   // Call the original emitWarning function for other warnings

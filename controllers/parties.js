@@ -3,7 +3,7 @@ import { sanitizeFilter } from 'mongoose';
 
 /**
  * Fetches parties from the database that match the filter.
- * @param {Object} filter A query object to filter parties by name and list.
+ * @param {object} filter A query object to filter parties by name and list.
  * @returns {Promise<Array<PartyData>>} An array of parties that match the filter.
  */
 export const getParties = async (filter) => {
@@ -11,11 +11,12 @@ export const getParties = async (filter) => {
 };
 
 /**
- * @typedef {Object} PartyData
+ * @import { ObjectId } from 'mongoose';
+ * @typedef {object} PartyData
  * @property {ObjectId} _id The id of the party
- * @property {String} name The name of the party
- * @property {String} list The list the party is on
- * @property {NativeDate} createdAt The date the party was created
- * @property {NativeDate} updatedAt The date the party was last updated
- * @property {Number} __v The version of the party
+ * @property {string} name The name of the party
+ * @property {string} list The list the party is on
+ * @property {Date} createdAt The date the party was created
+ * @property {Date} updatedAt The date the party was last updated
+ * @property {number} __v The version of the party
  */

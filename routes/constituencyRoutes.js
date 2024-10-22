@@ -8,9 +8,9 @@ const router = express.Router();
 /**
  * GET /constituencies route to fetch constituencies from the database
  * Accepts query parameters to filter the results
- * @param {Express.Request} req Query parameters to filter the results in req.query
- * @param {Express.Response} res Response object to send the constituencies
- * @returns {Express.Response} Constituencies fetched from the database
+ * @param {Request} req Query parameters to filter the results in req.query
+ * @param {Response} res Response object to send the constituencies
+ * @returns {Response} Constituencies fetched from the database
  */
 router.get('/', (req, res) => {
 	let query;
@@ -31,3 +31,7 @@ router.get('/', (req, res) => {
 });
 
 export default router;
+
+/**
+ * @import { Request, Response } from 'express';
+ */

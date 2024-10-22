@@ -2,11 +2,10 @@
 
 import Candidate from '../schemas/Candidate.js';
 import { sanitizeFilter } from 'mongoose';
-import { ObjectId } from 'mongoose';
 
 /**
  * Fetches candidates from the database that match the filter.
- * @param {Object} filter A query object to filter candidates by party, nominationDistrict, name. The populate key is used to populate the party and nominationDistrict fields.
+ * @param {object} filter A query object to filter candidates by party, nominationDistrict, name. The populate key is used to populate the party and nominationDistrict fields.
  * @returns {Promise<Array<CandidateData>>} An array of candidates that match the filter.
  */
 export const getCandidates = async (filter) => {
@@ -29,12 +28,13 @@ export const getCandidates = async (filter) => {
 };
 
 /**
- * @typedef {Object} CandidateData
+ * @import { ObjectId } from 'mongoose';
+ * @typedef {object} CandidateData
  * @property {ObjectId} _id The id of the candidate
- * @property {String} name The name of the candidate
+ * @property {string} name The name of the candidate
  * @property {ObjectId} party The id of the party the candidate is a member of
  * @property {ObjectId} nominationDistrict The id of the nomination district the candidate is running in
- * @property {NativeDate} createdAt The date the candidate was created
- * @property {NativeDate} updatedAt The date the candidate was last updated
- * @property {Number} __v The version of the candidate
+ * @property {Date} createdAt The date the candidate was created
+ * @property {Date} updatedAt The date the candidate was last updated
+ * @property {number} __v The version of the candidate
  */

@@ -8,9 +8,9 @@ const router = express.Router();
 /**
  * GET /parties route to fetch parties from the database
  * Accepts query parameters to filter the results
- * @param {Express.Request} req Query parameters to filter the results in req.query
- * @param {Express.Response} res Response object to send the parties
- * @returns {Express.Response} Parties fetched from the database
+ * @param {Request} req Query parameters to filter the results in req.query
+ * @param {Response} res Response object to send the parties
+ * @returns {Response} Parties fetched from the database
  */
 router.get('/', (req, res) => {
 	let query; 
@@ -22,7 +22,8 @@ router.get('/', (req, res) => {
 	}
 
 	getParties(query)
-		.then(parties => res.json(parties))
+		.then(parties => {
+			res.json(parties);})
 		.catch(error => {
 			// eslint-disable-next-line no-console
 			console.error(error);
@@ -31,3 +32,7 @@ router.get('/', (req, res) => {
 });
 
 export default router;
+
+/**
+ * @import { Response, Request } from 'express';
+ */
