@@ -1,6 +1,6 @@
 /**
-*   Sets up a custom Mongodb Test Environment to be used with Jest
-*/
+	*   Sets up a custom Mongodb Test Environment to be used with Jest
+	*/
 
 import { TestEnvironment as NodeEnvironment } from 'jest-environment-node';
 
