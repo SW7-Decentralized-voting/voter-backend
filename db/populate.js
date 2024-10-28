@@ -15,6 +15,7 @@ import { districtsWithIds, candidateWithIds, pollingStationWithIds } from './add
 
 const db = connectToDb(keys.mongoURI);
 
+
 // Test connection
 db.once('open', () => {
 	// eslint-disable-next-line no-console
@@ -31,6 +32,11 @@ if (process.argv[2] === 'clear') {
 	await Constituency.deleteMany();
 	await PollingStation.deleteMany();
 }
+await Candidate.syncIndexes();
+await Party.syncIndexes();
+await NominationDistrict.syncIndexes();
+await Constituency.syncIndexes();
+await PollingStation.syncIndexes();
 
 await Party.insertMany(mockdata.parties);
 await Constituency.insertMany(mockdata.constituencies);
