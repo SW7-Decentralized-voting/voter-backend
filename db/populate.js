@@ -12,42 +12,45 @@ import PollingStation from '../schemas/PollingStation.js';
 
 import { districtsWithIds, candidateWithIds, pollingStationWithIds } from './addIds.js';
 
+export default async function populateDb(database, clear) {
 
-const db = connectToDb(keys.mongoURI);
+	const db = connectToDb(keys.mongoURI.toString().replace('/?', '/' + database + '?'));
 
+	console.log(keys.mongoURI.toString().replace('/?', '/' + database + '?'))
 
-// Test connection
-db.once('open', () => {
+	// Test connection
+	db.once('open', () => {
+		// eslint-disable-next-line no-console
+		console.log('Connected to MongoDB');
+	});
+
+	// Clear the database if argument 'clear' is passed
+	if (clear) {
+		// eslint-disable-next-line no-console
+		console.log('Clearing database...');
+		await Candidate.deleteMany();
+		await Party.deleteMany();
+		await NominationDistrict.deleteMany();
+		await Constituency.deleteMany();
+		await PollingStation.deleteMany();
+	}
+	await Candidate.syncIndexes();
+	await Party.syncIndexes();
+	await NominationDistrict.syncIndexes();
+	await Constituency.syncIndexes();
+	await PollingStation.syncIndexes();
+
+	await Party.insertMany(mockdata.parties);
+	await Constituency.insertMany(mockdata.constituencies);
+	await NominationDistrict.insertMany(await districtsWithIds(mockdata.nominationDistricts));
+	await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
+	await PollingStation.insertMany(await pollingStationWithIds(mockdata.pollingStations));
+
+	const party1 = await Party.findOne({ name: 'Nordlisten' });
+
+	const candidatesInParty1 = await Candidate.find({ party: party1._id });
 	// eslint-disable-next-line no-console
-	console.log('Connected to MongoDB');
-});
+	console.log('Candidates in', party1.name, ':\n ', candidatesInParty1.map(candidate => candidate.name).join('\n  '));
 
-// Clear the database if argument 'clear' is passed
-if (process.argv[2] === 'clear') {
-	// eslint-disable-next-line no-console
-	console.log('Clearing database...');
-	await Candidate.deleteMany();
-	await Party.deleteMany();
-	await NominationDistrict.deleteMany();
-	await Constituency.deleteMany();
-	await PollingStation.deleteMany();
+	db.close();
 }
-await Candidate.syncIndexes();
-await Party.syncIndexes();
-await NominationDistrict.syncIndexes();
-await Constituency.syncIndexes();
-await PollingStation.syncIndexes();
-
-await Party.insertMany(mockdata.parties);
-await Constituency.insertMany(mockdata.constituencies);
-await NominationDistrict.insertMany(await districtsWithIds(mockdata.nominationDistricts));
-await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
-await PollingStation.insertMany(await pollingStationWithIds(mockdata.pollingStations));
-
-const party1 = await Party.findOne({ name: 'Nordlisten' });
-
-const candidatesInParty1 = await Candidate.find({ party: party1._id });
-// eslint-disable-next-line no-console
-console.log('Candidates in', party1.name, ':\n ', candidatesInParty1.map(candidate => candidate.name).join('\n  '));
-
-db.close();
