@@ -12,11 +12,14 @@ import PollingStation from '../schemas/PollingStation.js';
 
 import { districtsWithIds, candidateWithIds, pollingStationWithIds } from './addIds.js';
 
+/**
+ * Populate the database with mock data
+ * @param {string} database The database to populate
+ * @param {boolean} clear Clear the database before populating
+ */
 export default async function populateDb(database, clear) {
 
 	const db = connectToDb(keys.mongoURI.toString().replace('/?', '/' + database + '?'));
-
-	console.log(keys.mongoURI.toString().replace('/?', '/' + database + '?'))
 
 	// Test connection
 	db.once('open', () => {
