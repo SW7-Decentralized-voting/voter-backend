@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(baseRoute, router);
 
-const server = app.listen(8888);
+const server = app.listen(0);
 
 beforeAll(async () => {
 	await connectDb();
