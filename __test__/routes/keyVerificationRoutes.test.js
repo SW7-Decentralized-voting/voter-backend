@@ -1,0 +1,75 @@
+import request from 'supertest';
+import express from 'express';
+import mongoose from 'mongoose';
+import router from '../../routes/keyVerificationRoutes.js'; // Adjust the import path to where your route is located
+import connectDb from '../setup/connect.js';
+import populate from '../db/popiulate.js';
+import PollingStation from '../../schemas/PollingStation.js';
+import Key from '../../schemas/Key.js';
+
+const baseRoute = '/api/v1/key';
+
+const app = express();
+app.use(express.json());
+app.use(baseRoute, router);
+
+const server = app.listen(0);
+
+beforeAll(async () => {
+	connectDb();
+
+	await populate();
+});
+
+describe('POST /api/v1/key/verify', () => {
+	it('should return 200 OK and message with token given a valid key', async () => {
+		const keyHash = '123456';
+		const pollingStation = await PollingStation.findOne();
+
+		await new Key({
+			keyHash: keyHash,
+			used: false,
+			pollingStation: pollingStation._id,
+		}).save();
+
+		const response = await request(app)
+			.post(baseRoute + '/verify')
+			.send({ key: '123456', pollingStation: pollingStation._id });
+		expect(response.statusCode).toBe(200);
+		expect(response.body).toEqual({
+			message: 'Key verified',
+			token: expect.stringMatching(/.+\..+\..+/),
+		});
+	});
+
+	it('should return 400 Bad Request with missing key and pollingStation', async () => {
+		const response = await request(app)
+			.post(baseRoute + '/verify')
+			.send({});
+		expect(response.statusCode).toBe(400);
+		expect(response.body).toEqual({ message: 'Key and pollingStation are required' });
+	});
+
+	it('should return 400 Bad Request if missing pollingStation', async () => {
+		const response = await request(app)
+			.post(baseRoute + '/verify')
+			.send({ key: '123456' });
+		expect(response.statusCode).toBe(400);
+		expect(response.body).toEqual({ message: 'Key and pollingStation are required' });
+	});
+
+	it('should return 401 Unauthorized with invalid key', async () => {
+		const pollingStation = await PollingStation.findOne();
+
+		const response = await request(app)
+			.post(baseRoute + '/verify')
+			.send({ key: 'invalid', pollingStation: pollingStation._id });
+		expect(response.statusCode).toBe(401);
+		expect(response.body).toEqual({ message: 'Invalid key' });
+	});
+});
+
+afterAll(async () => {
+	await mongoose.connection.close();
+	server.close();
+});
