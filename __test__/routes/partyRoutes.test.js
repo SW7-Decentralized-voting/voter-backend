@@ -6,6 +6,7 @@ import connectDb from '../setup/connect.js';
 import mockdata from '../../db/mockdata.js';
 import Party from '../../schemas/Party.js';
 import { jest } from '@jest/globals';
+import populate from '../db/popiulate.js';
 
 const baseRoute = '/api/v1/parties';
 
@@ -16,8 +17,9 @@ app.use(baseRoute, router);
 const server = app.listen(0);
 
 beforeAll(async () => {
-	await connectDb();
-	await Party.insertMany(mockdata.parties);
+	connectDb();
+
+	await populate();
 });
 
 describe('GET /api/v1/parties', () => {

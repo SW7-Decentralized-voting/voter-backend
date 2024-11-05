@@ -4,12 +4,13 @@ import mongoose from 'mongoose';
 import router from '../../routes/candidateRoutes.js'; // Adjust the import path to where your route is located
 import connectDb from '../setup/connect.js';
 import mockdata from '../../db/mockdata.js';
-import { candidateWithIds, districtsWithIds } from '../../db/addIds.js';
+import { candidateWithIds } from '../../db/addIds.js';
 import Candidate from '../../schemas/Candidate.js';
 import NominationDistrict from '../../schemas/NominationDistrict.js';
 import Party from '../../schemas/Party.js';
 import Constituency from '../../schemas/Constituency.js';
 import { jest } from '@jest/globals';
+import populate from '../db/popiulate.js';
 
 const baseRoute = '/api/v1/candidates';
 
@@ -20,11 +21,9 @@ app.use(baseRoute, router);
 const server = app.listen(0);
 
 beforeAll(async () => {
-	await connectDb();
-	await Party.insertMany(mockdata.parties);
-	await Constituency.insertMany(mockdata.constituencies);
-	await NominationDistrict.insertMany(await districtsWithIds(mockdata.nominationDistricts));
-	await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
+	connectDb();
+	
+	await populate();
 });
 
 describe('GET /api/v1/candidates', () => {
