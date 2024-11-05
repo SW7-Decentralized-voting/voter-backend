@@ -6,6 +6,7 @@ import connectDb from '../setup/connect.js';
 import populate from '../db/popiulate.js';
 import PollingStation from '../../schemas/PollingStation.js';
 import Key from '../../schemas/Key.js';
+import { jest } from '@jest/globals';
 
 const baseRoute = '/api/v1/key';
 
@@ -58,6 +59,23 @@ describe('POST /api/v1/key/verify', () => {
 		expect(response.body).toEqual({ message: 'Key and pollingStation are required' });
 	});
 
+	it('should return 400 Bad Request if pollingStation is not found', async () => {
+		const pollingStationId = new mongoose.Types.ObjectId();
+		const response = await request(app)
+			.post(baseRoute + '/verify')
+			.send({ key: '123456', pollingStation: pollingStationId });
+		expect(response.statusCode).toBe(400);
+		expect(response.body).toEqual({ message: 'Polling station not found: ' + pollingStationId });
+	});
+
+	it('should return 400 Bad Request if pollingStation id is invalid', async () => {
+		const response = await request(app)
+			.post(baseRoute + '/verify')
+			.send({ key: '123456', pollingStation: 'invalid' });
+		expect(response.statusCode).toBe(400);
+		expect(response.body).toEqual({ message: 'Invalid id: ' + 'invalid' });
+	});
+
 	it('should return 401 Unauthorized with invalid key', async () => {
 		const pollingStation = await PollingStation.findOne();
 
@@ -66,6 +84,18 @@ describe('POST /api/v1/key/verify', () => {
 			.send({ key: 'invalid', pollingStation: pollingStation._id });
 		expect(response.statusCode).toBe(401);
 		expect(response.body).toEqual({ message: 'Invalid key' });
+	});
+
+	it('should return 500 Internal Server Error if an uncaught error happens', async () => {
+		jest.spyOn(PollingStation, 'findOne').mockImplementationOnce(() => {
+			throw new Error('Uncaught error');
+		});
+		jest.spyOn(console, 'error').mockImplementationOnce(() => {});
+		const response = await request(app)
+			.post(baseRoute + '/verify')
+			.send({ key: '123456', pollingStation: 'invalid' });
+		expect(response.statusCode).toBe(500);
+		expect(response.body).toEqual({ message: 'Error verifying key' });
 	});
 });
 

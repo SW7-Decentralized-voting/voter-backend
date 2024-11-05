@@ -22,7 +22,6 @@ const server = app.listen(0);
 
 beforeAll(async () => {
 	connectDb();
-	
 	await populate();
 });
 
@@ -116,11 +115,10 @@ describe('GET /api/v1/candidates', () => {
 	});
 
 	it('should return empty array if no candidates are found', async () => {
-		await Candidate.deleteMany();
+		jest.spyOn(Candidate, 'find').mockImplementationOnce(() => []);
 		const response = await request(app).get(baseRoute);
 		expect(response.statusCode).toBe(200);
 		expect(response.body).toEqual([]);
-		await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
 	});
 
 	it('should return 400 Bad Request if a query id is invalid', async () => {
