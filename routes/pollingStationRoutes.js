@@ -4,7 +4,7 @@ import getStationIdByPort from '../controllers/pollingStations.js';
 const router = express.Router();
 
 
-router.get('/', async (req, res) => {
+router.get('/:port', async (req, res) => {
 	await getStationIdByPort(req, res);
 });
 

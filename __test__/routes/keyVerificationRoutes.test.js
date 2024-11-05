@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import router from '../../routes/keyVerificationRoutes.js'; // Adjust the import path to where your route is located
 import connectDb from '../setup/connect.js';
-import populate from '../db/popiulate.js';
+import populate from '../db/populate.js';
 import PollingStation from '../../schemas/PollingStation.js';
 import Key from '../../schemas/Key.js';
 import { jest } from '@jest/globals';

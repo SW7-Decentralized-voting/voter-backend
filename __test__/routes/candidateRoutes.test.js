@@ -9,7 +9,7 @@ import NominationDistrict from '../../schemas/NominationDistrict.js';
 import Party from '../../schemas/Party.js';
 import Constituency from '../../schemas/Constituency.js';
 import { jest } from '@jest/globals';
-import populate from '../db/popiulate.js';
+import populate from '../db/populate.js';
 
 const baseRoute = '/api/v1/candidates';
 
