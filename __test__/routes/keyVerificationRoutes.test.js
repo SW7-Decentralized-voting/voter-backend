@@ -22,6 +22,12 @@ beforeAll(async () => {
 	await populate();
 });
 
+jest.unstable_mockModule('../../config//keys.js', () => {
+	return {
+		jwtSecret: 'testsecret',
+	};
+})
+
 describe('POST /api/v1/key/verify', () => {
 	it('should return 200 OK and message with token given a valid key', async () => {
 		const keyHash = '123456';
@@ -90,7 +96,7 @@ describe('POST /api/v1/key/verify', () => {
 		jest.spyOn(PollingStation, 'findOne').mockImplementationOnce(() => {
 			throw new Error('Uncaught error');
 		});
-		jest.spyOn(console, 'error').mockImplementationOnce(() => {});
+		jest.spyOn(console, 'error').mockImplementationOnce(() => { });
 		const response = await request(app)
 			.post(baseRoute + '/verify')
 			.send({ key: '123456', pollingStation: 'invalid' });
