@@ -1,5 +1,11 @@
-import PortMapping from "../schemas/PortMapping";
+import PortMapping from '../schemas/PortMapping.js';
 
+/**
+ * Get the polling station ID by port number
+ * @param {Request} req Express request object with the port number as a parameter
+ * @param {Response} res Express response object
+ * @returns {Response} The polling station ID and service name for the given port or an error message
+ */
 export default async function getStationIdByPort(req, res) {
 	const { port } = req.params;
 
@@ -24,3 +30,7 @@ export default async function getStationIdByPort(req, res) {
 		service: portMapping.service,
 	});
 }
+
+/**
+ * @import { Request, Response } from 'express';
+ */
