@@ -24,3 +24,5 @@ jobs:
 
       - name: Run Jest tests
         run: npm run test
+    env:
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}

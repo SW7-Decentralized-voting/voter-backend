@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import router from '../../routes/candidateRoutes.js'; // Adjust the import path to where your route is located
 import connectDb from '../setup/connect.js';
 import mockdata from '../../db/mockdata.js';
-import { candidateWithIds } from '../../db/addIds.js';
 import Candidate from '../../schemas/Candidate.js';
 import NominationDistrict from '../../schemas/NominationDistrict.js';
 import Party from '../../schemas/Party.js';

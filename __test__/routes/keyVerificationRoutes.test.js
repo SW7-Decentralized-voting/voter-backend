@@ -22,12 +22,6 @@ beforeAll(async () => {
 	await populate();
 });
 
-jest.unstable_mockModule('../../config//keys.js', () => {
-	return {
-		jwtSecret: 'testsecret',
-	};
-})
-
 describe('POST /api/v1/key/verify', () => {
 	it('should return 200 OK and message with token given a valid key', async () => {
 		const keyHash = '123456';
