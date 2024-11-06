@@ -1,13 +1,13 @@
 import request from 'supertest';
 import express from 'express';
 import mongoose from 'mongoose';
-import router from '../../routes/districtRoutes.js'; // Adjust the import path to where your route is located
+import router from '../../routes/districtRoutes.js'; 
 import connectDb from '../setup/connect.js';
 import mockdata from '../../db/mockdata.js';
 import { jest } from '@jest/globals';
 import Constituency from '../../schemas/Constituency.js';
 import NominationDistrict from '../../schemas/NominationDistrict.js';
-import { districtsWithIds } from '../../db/addIds.js';
+import populate from '../db/populate.js';
 
 const baseRoute = '/api/v1/districts';
 
@@ -18,9 +18,9 @@ app.use(baseRoute, router);
 const server = app.listen(0);
 
 beforeAll(async () => {
-	await connectDb();
-	await Constituency.insertMany(mockdata.constituencies);
-	await NominationDistrict.insertMany(await districtsWithIds(mockdata.nominationDistricts));
+	connectDb();
+
+	await populate();
 });
 
 describe('GET /api/v1/districts', () => {

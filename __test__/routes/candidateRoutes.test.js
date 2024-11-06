@@ -1,15 +1,15 @@
 import request from 'supertest';
 import express from 'express';
 import mongoose from 'mongoose';
-import router from '../../routes/candidateRoutes.js'; // Adjust the import path to where your route is located
+import router from '../../routes/candidateRoutes.js'; 
 import connectDb from '../setup/connect.js';
 import mockdata from '../../db/mockdata.js';
-import { candidateWithIds, districtsWithIds } from '../../db/addIds.js';
 import Candidate from '../../schemas/Candidate.js';
 import NominationDistrict from '../../schemas/NominationDistrict.js';
 import Party from '../../schemas/Party.js';
 import Constituency from '../../schemas/Constituency.js';
 import { jest } from '@jest/globals';
+import populate from '../db/populate.js';
 
 const baseRoute = '/api/v1/candidates';
 
@@ -20,11 +20,8 @@ app.use(baseRoute, router);
 const server = app.listen(0);
 
 beforeAll(async () => {
-	await connectDb();
-	await Party.insertMany(mockdata.parties);
-	await Constituency.insertMany(mockdata.constituencies);
-	await NominationDistrict.insertMany(await districtsWithIds(mockdata.nominationDistricts));
-	await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
+	connectDb();
+	await populate();
 });
 
 describe('GET /api/v1/candidates', () => {
@@ -117,11 +114,10 @@ describe('GET /api/v1/candidates', () => {
 	});
 
 	it('should return empty array if no candidates are found', async () => {
-		await Candidate.deleteMany();
+		jest.spyOn(Candidate, 'find').mockImplementationOnce(() => []);
 		const response = await request(app).get(baseRoute);
 		expect(response.statusCode).toBe(200);
 		expect(response.body).toEqual([]);
-		await Candidate.insertMany(await candidateWithIds(mockdata.candidates));
 	});
 
 	it('should return 400 Bad Request if a query id is invalid', async () => {
