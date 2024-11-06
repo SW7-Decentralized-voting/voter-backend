@@ -1,7 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import mongoose from 'mongoose';
-import router from '../../routes/pollingStationRoutes.js'; // Adjust the import path to where your route is located
+import router from '../../routes/pollingStationRoutes.js'; 
 import connectDb from '../setup/connect.js';
 import populate from '../db/populate.js';
 import PortMapping from '../../schemas/PortMapping.js';

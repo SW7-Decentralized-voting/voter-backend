@@ -1,7 +1,7 @@
 import request from 'supertest';
 import express from 'express';
 import mongoose from 'mongoose';
-import router from '../../routes/districtRoutes.js'; // Adjust the import path to where your route is located
+import router from '../../routes/districtRoutes.js'; 
 import connectDb from '../setup/connect.js';
 import mockdata from '../../db/mockdata.js';
 import { jest } from '@jest/globals';

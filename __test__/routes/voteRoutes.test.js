@@ -1,6 +1,6 @@
 import request from 'supertest';
 import express from 'express';
-import router from '../../routes/voteRoutes.js'; // Adjust the import path to where your route is located
+import router from '../../routes/voteRoutes.js'; 
 
 const baseRoute = '/api/v1/vote';
 
