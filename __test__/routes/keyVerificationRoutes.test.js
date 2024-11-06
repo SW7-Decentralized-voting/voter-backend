@@ -6,7 +6,7 @@ import connectDb from '../setup/connect.js';
 import populate from '../db/populate.js';
 import PollingStation from '../../schemas/PollingStation.js';
 import Key from '../../schemas/Key.js';
-import { jest } from '@jest/globals';
+import { expect, jest } from '@jest/globals';
 
 const baseRoute = '/api/v1/key';
 
@@ -29,7 +29,6 @@ describe('POST /api/v1/key/verify', () => {
 
 		await new Key({
 			keyHash: keyHash,
-			used: false,
 			pollingStation: pollingStation._id,
 		}).save();
 
@@ -41,6 +40,23 @@ describe('POST /api/v1/key/verify', () => {
 			message: 'Key verified',
 			token: expect.stringMatching(/.+\..+\..+/),
 		});
+	});
+
+	it('should set key to used after verification', async () => {
+		const pollingStation = await PollingStation.findOne();
+		const key = new Key({
+			keyHash: '123456',
+			pollingStation: pollingStation._id,
+		});
+		await key.save();
+
+		expect(key.isUsed).toBe(false);
+		await request(app)
+			.post(baseRoute + '/verify')
+			.send({ key: key.keyHash, pollingStation: key.pollingStation });
+
+		const updatedKey = await Key.findOne({ keyHash: key.keyHash });
+		expect(updatedKey.isUsed).toBe(true);
 	});
 
 	it('should return 400 Bad Request with missing key and pollingStation', async () => {
