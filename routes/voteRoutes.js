@@ -1,17 +1,13 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 
 const router = express.Router();
 
-router.post('/candidate', (req, res) => {
-	res.send('Voting for a candidate');
-});
+router.use(bodyParser.json());
 
-router.post('/party', (req, res) => {
-	res.send('Voting for a party');
-});
-
-router.post('/blank', (req, res) => {
-	res.send('Voting for a blank ballot');
-});
+router.post('/', (req, res) => {
+	const id = req.body.id;
+	res.send('Voting for party or candidate with id: ' + id);
+} );
 
 export default router;
