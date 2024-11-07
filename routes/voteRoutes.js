@@ -1,13 +1,30 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import { auth } from '../middleware/verifyToken.js';
+import axios from 'axios';
+import keys from '../config/keys.js';
 
 const router = express.Router();
 
-router.use(bodyParser.json());
+const bcApi = axios.create({
+	baseURL: keys.blockchainUrl,
+});
 
-router.post('/', (req, res) => {
-	const id = req.body.id;
-	res.send('Voting for party or candidate with id: ' + id);
-} );
+router.post('/', auth, async (req, res) => {
+	const id = req.body?.id;
+
+	try {
+		const response = await bcApi.post('/vote', { id });
+
+		res.status(200).send(response.data);
+	} catch (error) {
+
+		if (!error.response) {
+			return res.status(500).json({ error: 'Could not connect to blockchain service' });
+		}
+
+		console.error(error);
+		res.status(500).json({ error: 'Failed to cast vote' });
+	}
+});
 
 export default router;
