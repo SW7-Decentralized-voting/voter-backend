@@ -27,6 +27,9 @@ async function verifyKey(req, res) {
 			return res.status(401).json({ message: 'Invalid key' });
 		}
 
+		keyDoc.isUsed = true;
+		await keyDoc.save();
+
 		const token = jwt.sign({ key: keyDoc.keyHash, pollingStation: keyDoc.pollingStation }, keys.jwtSecret, { expiresIn: '10m' });
 
 		return res.status(200).json({
