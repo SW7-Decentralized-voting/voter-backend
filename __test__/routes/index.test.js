@@ -3,7 +3,7 @@
 import request from 'supertest';
 import express from 'express';
 import mongoose from 'mongoose';
-import router from '../../routes/index.js'; // Adjust the import path to where your route is located
+import router from '../../routes/index.js'; 
 import connectDb from '../setup/connect.js';
 
 const baseRoute = '/api/v1';

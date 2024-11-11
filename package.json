@@ -28,6 +28,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "jest": "^29.7.0",
+    "jsonwebtoken": "^9.0.2",
     "mongodb-memory-server": "^10.1.2",
     "mongoose": "^8.7.1",
     "nodemon": "^3.1.7"
@@ -43,6 +44,12 @@
     "supertest": "^7.0.0"
   },
   "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/__test__/",
+      "/config/",
+      "/db/mockdata.js"
+    ],
     "globalSetup": "<rootDir>/__test__/setup/jest-setup.js",
     "globalTeardown": "<rootDir>/__test__/setup/jest-teardown.js",
     "testEnvironment": "<rootDir>/__test__/setup/jest-mongo.js"
