@@ -17,6 +17,9 @@ router.post('/', auth, async (req, res) => {
 
 		res.status(200).send(response.data);
 	} catch (error) {
+		if (error.response?.status === 400) {
+			return res.status(400).json({ error: error.response.data.error });
+		}
 
 		if (!error.response) {
 			return res.status(500).json({ error: 'Could not connect to blockchain service' });
