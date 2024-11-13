@@ -21,7 +21,7 @@ router.post('/', auth, async (req, res) => {
 		if (!error.response) {
 			return res.status(500).json({ error: 'Could not connect to blockchain service' });
 		}
-
+		// eslint-disable-next-line no-console
 		console.error(error);
 		res.status(500).json({ error: 'Failed to cast vote' });
 	}
