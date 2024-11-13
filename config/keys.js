@@ -2,10 +2,13 @@ import { config } from 'dotenv';
 
 // Load environment variables based on NODE_ENV
 
-if (process.env.NODE_ENV === 'production') {
-  config({ path: './.env.prod' });
-} else {
-  config({ path: './.env' });
+
+if (!process.env.GITHUB_ACTIONS) {
+  if (process.env.NODE_ENV === 'production') {
+    config({ path: './.env.prod' });
+  } else {
+    config({ path: './.env' });
+  }
 }
 
 // Access the environment variables

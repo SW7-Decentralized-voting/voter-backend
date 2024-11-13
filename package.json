@@ -45,6 +45,12 @@
     "supertest": "^7.0.0"
   },
   "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/__test__/",
+      "/config/",
+      "/db/mockdata.js"
+    ],
     "globalSetup": "<rootDir>/__test__/setup/jest-setup.js",
     "globalTeardown": "<rootDir>/__test__/setup/jest-teardown.js",
     "testEnvironment": "<rootDir>/__test__/setup/jest-mongo.js"
