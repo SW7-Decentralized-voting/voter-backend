@@ -30,18 +30,26 @@ describe('POST /api/v1/vote', () => {
 			}
 			return Promise.reject(mockResponse);
 		});
-
-		const response = await request(app).post(baseRoute).send({ id });
-
+	
+		const response = await request(app).post(baseRoute).send(id ? { id } : {});
+	
 		expect(response.statusCode).toBe(expectedStatus);
 		expect(response.body).toEqual(expectedBody);
-		
-		expect(spy).toHaveBeenCalledWith(
-			expect.any(String),
-			expect.objectContaining({ id: expect.any(String) })
-		);
-
+	
+		if (id) {
+			expect(spy).toHaveBeenCalledWith(
+				expect.any(String),
+				expect.objectContaining({ id: expect.any(String) })
+			);
+		} else {
+			expect(spy).not.toHaveBeenCalled();
+		}
 	};
+
+	it('should return 400 Bad Request when id is missing', async () => {
+		const expectedBody = { error: 'Missing id' };
+		await testVote(undefined, 400, { status: 400, data: expectedBody }, expectedBody);
+	});
 
 	it('should return 200 OK and cast vote', async () => {
 		const expectedBody = { message: 'Vote cast successfully', transactionHash: '0x1234' };
