@@ -5,15 +5,17 @@ import keys from '../config/keys.js';
 
 const router = express.Router();
 
-const bcApi = axios.create({
-	baseURL: keys.blockchainUrl,
-});
+const baseUrl = keys.blockchainUrl;
 
 router.post('/', auth, async (req, res) => {
 	const id = req.body?.id;
 
+	if (!id) {
+		return res.status(400).json({ error: 'Missing id' });
+	}
+
 	try {
-		const response = await bcApi.post('/vote', { id });
+		const response = await axios.post(`${baseUrl}/vote`, { id });
 
 		res.status(200).send(response.data);
 	} catch (error) {
@@ -22,6 +24,8 @@ router.post('/', auth, async (req, res) => {
 		}
 
 		if (!error.response) {
+			// eslint-disable-next-line no-console
+			console.error('Could not connect to blockchain service');
 			return res.status(500).json({ error: 'Could not connect to blockchain service' });
 		}
 		// eslint-disable-next-line no-console

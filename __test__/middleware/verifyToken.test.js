@@ -46,7 +46,7 @@ describe('auth', () => {
 
 		auth(req, res, next);
 
-		expect(jwt.verify).toHaveBeenCalledWith('validToken', process.env.JWT_KEY);
+		expect(jwt.verify).toHaveBeenCalledWith('validToken', process.env.JWT_SECRET);
 		expect(req.user).toEqual(decodedToken);
 		expect(next).toHaveBeenCalled();
 	});

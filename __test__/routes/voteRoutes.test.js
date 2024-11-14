@@ -1,36 +1,51 @@
 import request from 'supertest';
 import express from 'express';
-import router from '../../routes/voteRoutes.js'; 
+import axios from 'axios';
+import { it, jest, expect } from '@jest/globals';
 
+let router;
 const baseRoute = '/api/v1/vote';
 
 const app = express();
 app.use(express.json());
-app.use(baseRoute, router);
+app.use(baseRoute, async (req, res, next) => (await router)(req, res, next));
 
 const server = app.listen(0);
 
-describe('POST /api/v1/vote/candidate', () => {
-	it('should return 200 OK and cast vote', async () => {
-		const response = await request(app).post(baseRoute + '/candidate');
-		expect(response.statusCode).toBe(200);
-		expect(response.text).toEqual('Voting for a candidate');
-	});
+beforeAll(async () => {
+	router = (await import('../../routes/voteRoutes.js')).default;
 });
 
-describe('POST /api/v1/vote/party', () => {
-	it('should return 200 OK and cast vote', async () => {
-		const response = await request(app).post(baseRoute + '/party');
-		expect(response.statusCode).toBe(200);
-		expect(response.text).toEqual('Voting for a party');
-	});
+jest.unstable_mockModule('../../middleware/verifyToken.js', () => {
+	return {
+		auth: jest.fn((req, res, next) => next()),
+	};
 });
 
-describe('POST /api/v1/vote/blank', () => {
+describe('POST /api/v1/vote', () => {
+	const testVote = async (id, expectedStatus, mockResponse, expectedBody) => {
+		const spy = jest.spyOn(axios, 'post').mockImplementation(() => {
+			if (expectedStatus === 200) {
+				return Promise.resolve(mockResponse);
+			}
+			return Promise.reject(mockResponse);
+		});
+
+		const response = await request(app).post(baseRoute).send({ id });
+
+		expect(response.statusCode).toBe(expectedStatus);
+		expect(response.body).toEqual(expectedBody);
+		
+		expect(spy).toHaveBeenCalledWith(
+			expect.any(String),
+			expect.objectContaining({ id: expect.any(String) })
+		);
+
+	};
+
 	it('should return 200 OK and cast vote', async () => {
-		const response = await request(app).post(baseRoute + '/blank');
-		expect(response.statusCode).toBe(200);
-		expect(response.text).toEqual('Voting for a blank ballot');
+		const expectedBody = { message: 'Vote cast successfully', transactionHash: '0x1234' };
+		await testVote('0x1', 200, { status: 200, data: expectedBody }, expectedBody);
 	});
 });
 
