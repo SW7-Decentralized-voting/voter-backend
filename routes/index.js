@@ -8,6 +8,7 @@ import districtRoutes from './districtRoutes.js';
 import constituencyRoutes from './constituencyRoutes.js';
 import keyVerificationRoutes from './keyVerificationRoutes.js';
 import pollingStationRoutes from './pollingStationRoutes.js';
+import keyCountRoutes from './keyCountRoutes.js';
 
 router.get('/', (req, res) => {
 	res.send(router.stack);
@@ -20,5 +21,6 @@ router.use('/constituencies', constituencyRoutes);
 router.use('/vote', voteRoutes);
 router.use('/key', keyVerificationRoutes);
 router.use('/pollingStations', pollingStationRoutes);
+router.use('/keyCount', keyCountRoutes);
 
 export default router;
