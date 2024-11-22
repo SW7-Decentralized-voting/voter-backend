@@ -4,6 +4,7 @@ const corsConfig = {
 	origin: [
 		'http://127.0.0.1:3001',
 		'http://localhost:3001',
+		'http://130.225.39.55:3001'
 	],
 	optionsSuccessStatus: 200,
 	exposedHeaders: ['Content-Range', 'X-Content-Range'],
