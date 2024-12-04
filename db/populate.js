@@ -62,5 +62,3 @@ export default async function populateDb(database, clear) {
 
 	db.close();
 }
-
-await populateDb('test', true);
