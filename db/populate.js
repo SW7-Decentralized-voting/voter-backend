@@ -9,8 +9,10 @@ import Party from '../schemas/Party.js';
 import NominationDistrict from '../schemas/NominationDistrict.js';
 import Constituency from '../schemas/Constituency.js';
 import PollingStation from '../schemas/PollingStation.js';
+import Key from '../schemas/Key.js';
 
 import { districtsWithIds, candidateWithIds, pollingStationWithIds } from './addIds.js';
+import Counter from '../schemas/Counter.js';
 
 /**
  * Populate the database with mock data
@@ -31,12 +33,15 @@ export default async function populateDb(database, clear) {
 	if (clear) {
 		// eslint-disable-next-line no-console
 		console.log('Clearing database...');
+		await Counter.updateOne({ collectionName: 'Candidate-Party' }, { seq: -1 });
 		await Candidate.deleteMany();
 		await Party.deleteMany();
 		await NominationDistrict.deleteMany();
 		await Constituency.deleteMany();
 		await PollingStation.deleteMany();
+		await Key.deleteMany();
 	}
+	await Counter.syncIndexes();
 	await Candidate.syncIndexes();
 	await Party.syncIndexes();
 	await NominationDistrict.syncIndexes();
